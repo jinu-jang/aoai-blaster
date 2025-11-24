@@ -15,8 +15,8 @@ class AzureDeploymentConfig:
     - Specify "default" for DefaultAzureCredential() based auth.
     - Specify "interactive" for InteractiveBrowserCredential() based auth.
     """
-    model: Optional[str] = None
-    """Model name."""
+    model: str
+    """Model name as deployed in Azure OpenAI."""
     api_version: str = "2025-01-01-preview"
     """API version to use. Defaults to '2025-01-01-preview'."""
     rpm_limit: Optional[int] = None
@@ -25,3 +25,9 @@ class AzureDeploymentConfig:
     """(Unused) Tokens-per-minute limit for this endpoint."""
     weight: int = 1
     """Weight for weighted round-robin load balancing."""
+
+    # Passed directly to inference
+    temperature: Optional[float] = None
+    """Temperature setting for completions."""
+    max_completion_tokens: Optional[int] = None
+    """Maximum number of tokens to generate in completions."""
