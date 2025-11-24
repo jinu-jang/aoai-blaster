@@ -1,28 +1,11 @@
 import threading
 import time
 from dataclasses import dataclass, field
-from typing import Literal, Optional
+from typing import Optional
 
 from openai import AzureOpenAI
 
-
-@dataclass
-class AzureDeploymentConfig:
-    """Configuration for a single Azure OpenAI deployment endpoint."""
-
-    name: str
-    """Name of deployment; for logging purposes."""
-    endpoint: str
-    """Azure OpenAI endpoint URL."""
-    api_key: str | Literal["default", "interactive"]
-    """API key for authentication.
-    - Specify "default" for DefaultAzureCredential() based auth.
-    - Specify "interactive" for InteractiveBrowserCredential() based auth.
-    """
-    model: Optional[str] = None
-    """Model name."""
-    weight: int = 1
-    """Weight for weighted round-robin load balancing."""
+from azure_openai_blaster.azure_deployment import AzureDeploymentConfig
 
 
 @dataclass
