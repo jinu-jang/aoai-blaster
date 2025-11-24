@@ -17,6 +17,8 @@ class AzureDeploymentConfig:
     """
     model: Optional[str] = None
     """Model name."""
+    api_version: str = "2025-01-01-preview"
+    """API version to use. Defaults to '2025-01-01-preview'."""
     rpm_limit: Optional[int] = None
     """(Unused) Requests-per-minute limit for this endpoint."""
     tpm_limit: Optional[int] = None
