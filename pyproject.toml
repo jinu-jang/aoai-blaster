@@ -1,0 +1,46 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "azure_openai_blaster"
+version = "0.0.1a0"
+description = "High-throughput scheduler & resilience toolkit for Azure OpenAI endpoints (queueing, rate-limit smoothing, backoff, tracing)."
+requires-python = ">=3.11"
+readme = "README.md"
+license = "MIT"
+authors = [
+    {name = "Jinu Jang"}
+]
+keywords = [
+    "azure", "openai", "azure-openai", "scheduler", "throughput", "rate-limits",
+    "retry", "async", "queue", "backoff", "observability"
+]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Framework :: AsyncIO",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+]
+dependencies = [
+    "openai",
+]
+
+[project.urls]
+Homepage = "https://github.com/jinu-jang/aoai-blaster"
+Repository = "https://github.com/jinu-jang/aoai-blaster.git"
+Issues = "https://github.com/jinu-jang/aoai-blaster/issues"
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "isort",
+    "pytest",
+]
+
+[tool.isort]
+profile = "black"
