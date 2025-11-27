@@ -10,9 +10,10 @@ class AzureDeploymentConfig:
     """Name of deployment; for logging purposes."""
     endpoint: str
     """Azure OpenAI endpoint URL."""
-    api_key: str | Literal["default", "interactive"]
+    api_key: str | Literal["default", "az", "interactive"]
     """API key for authentication.
     - Specify "default" for DefaultAzureCredential() based auth.
+    - Specify "az" for AzureCliCredential() based auth.
     - Specify "interactive" for InteractiveBrowserCredential() based auth.
     """
     model: str

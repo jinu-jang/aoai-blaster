@@ -1,6 +1,10 @@
 import logging
 
-from azure.identity import DefaultAzureCredential, InteractiveBrowserCredential
+from azure.identity import (
+    AzureCliCredential,
+    DefaultAzureCredential,
+    InteractiveBrowserCredential,
+)
 from openai import AzureOpenAI
 
 from azure_openai_blaster.azure_deployment import AzureDeploymentConfig
@@ -8,7 +12,7 @@ from azure_openai_blaster.azure_endpoint_state import AzureEndpointState
 
 
 def make_client(cfg: AzureDeploymentConfig) -> AzureOpenAI:
-    if cfg.api_key.lower() not in ("default", "interactive") and cfg.api_key:
+    if cfg.api_key.lower() not in ("default", "az", "interactive") and cfg.api_key:
         return AzureOpenAI(
             api_key=cfg.api_key,
             azure_endpoint=cfg.endpoint,
@@ -19,6 +23,9 @@ def make_client(cfg: AzureDeploymentConfig) -> AzureOpenAI:
     if cfg.api_key.lower() == "interactive":
         cred = InteractiveBrowserCredential()
         logging.info(f"Using InteractiveBrowserCredential for deployment '{cfg.name}'")
+    elif cfg.api_key.lower() == "az":
+        cred = AzureCliCredential()
+        logging.info(f"Using AzureCliCredential for deployment '{cfg.name}'")
     else:
         logging.info(f"Using DefaultAzureCredential for deployment '{cfg.name}'")
         cred = DefaultAzureCredential()
