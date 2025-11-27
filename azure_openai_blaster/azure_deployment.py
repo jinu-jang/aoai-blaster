@@ -27,7 +27,7 @@ class AzureDeploymentConfig:
     """Weight for weighted round-robin load balancing."""
 
     # Passed directly to inference
-    temperature: Optional[float] = None
+    temperature: Optional[float] = 1.0
     """Temperature setting for completions."""
     max_completion_tokens: Optional[int] = None
     """Maximum number of tokens to generate in completions."""

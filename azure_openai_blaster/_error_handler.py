@@ -1,3 +1,4 @@
+import logging
 import re
 from typing import Optional
 
@@ -17,6 +18,9 @@ def parse_retry_after_seconds(exc: RateLimitError) -> Optional[float]:
         headers = getattr(exc, "response", None)
         if headers is not None:
             retry_after = exc.response.headers.get("retry-after")
+            logging.info(
+                f"Parsed Retry-After header: {retry_after} -> {float(retry_after)}"
+            )
             if retry_after is not None:
                 try:
                     return float(retry_after)
@@ -30,6 +34,7 @@ def parse_retry_after_seconds(exc: RateLimitError) -> Optional[float]:
     m = _RE_TRY_AGAIN_IN.search(msg)
     if m:
         try:
+            logging.info(f"Parsed Retry-After message: {m.group(1)} seconds")
             return float(m.group(1))
         except ValueError:
             return None

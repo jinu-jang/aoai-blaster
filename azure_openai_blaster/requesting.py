@@ -26,7 +26,9 @@ class RequestResult:
 
 
 def invoke_endpoint(
-    ep: AzureEndpointState, messages: list[dict], **kwargs
+    ep: AzureEndpointState,
+    messages: list[dict] | list[ChatCompletionMessageParam],
+    **kwargs,
 ) -> RequestResult:
     if not is_chat_message_list(messages):
         raise ValueError("messages must be a list of ChatCompletionMessageParam")
@@ -57,7 +59,7 @@ def invoke_endpoint(
             )
 
         cooldown_until = time.monotonic() + retry_after
-        ep.set_cooldown(cooldown_until)
+        ep.set_cooldown(cooldown_until, exc=e)
         return RequestResult(ok=False, retryable=True, error=e)
 
     except AuthenticationError as e:
