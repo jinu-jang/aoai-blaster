@@ -45,3 +45,14 @@ dev = [
 
 [tool.isort]
 profile = "black"
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/pyproject.toml",
+  "/README.md",
+  "/LICENSE",
+  "/azure_openai_blaster/**",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["azure_openai_blaster"]
