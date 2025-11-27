@@ -54,8 +54,8 @@ config = {
       "max_completion_tokens": 512
     },
     {
-      "name": "gpt-4o-lite",
-      "endpoint": "https://my-aoai-resource.openai.azure.com/",
+      "name": "gpt-4o-backup",
+      "endpoint": "https://my-aoai-resource-2.openai.azure.com/",
       "api_key": "default",
       "model": "gpt-4o-mini",
       "weight": 1
