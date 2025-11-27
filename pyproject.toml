@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "azure_openai_blaster"
-version = "0.0.1a0"
+version = "0.1.0"
 description = "High-throughput scheduler & resilience toolkit for Azure OpenAI endpoints (queueing, rate-limit smoothing, backoff, tracing)."
 requires-python = ">=3.11"
 readme = "README.md"
