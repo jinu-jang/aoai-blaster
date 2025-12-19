@@ -4,6 +4,7 @@ from azure.identity import (
     AzureCliCredential,
     DefaultAzureCredential,
     InteractiveBrowserCredential,
+    get_bearer_token_provider,
 )
 from openai import AzureOpenAI
 
@@ -30,11 +31,17 @@ def make_client(cfg: AzureDeploymentConfig) -> AzureOpenAI:
         logging.info(f"Using DefaultAzureCredential for deployment '{cfg.name}'")
         cred = DefaultAzureCredential()
 
-    token = cred.get_token("https://cognitiveservices.azure.com/.default")
+    token_provider = get_bearer_token_provider(
+        cred, "https://cognitiveservices.azure.com/.default"
+    )
+    # Trigger a token fetch to ensure it works.
+    # Allows us to fail before multi-threading starts.
+    _ = token_provider()
+
     return AzureOpenAI(
-        api_key=token.token,
         azure_endpoint=cfg.endpoint,
         api_version=cfg.api_version,
+        azure_ad_token_provider=token_provider,
     )
 
 
